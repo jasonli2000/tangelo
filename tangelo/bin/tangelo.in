@@ -77,7 +77,8 @@ def shutdown(signum, frame):
 
 
 def start():
-    sys.stderr.write("starting tangelo...")
+    if daemonize:
+        sys.stderr.write("starting tangelo...")
 
     # Set up the global configuration.  This includes the hostname and port
     # number as specified in the CMake phase.
