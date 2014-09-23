@@ -61,6 +61,7 @@ def request_body():
     return RequestBody(cherrypy.request.body,
                        cherrypy.request.process_request_body)
 
+
 def session(key, value=None):
     r = cherrypy.session.get(key)
 
