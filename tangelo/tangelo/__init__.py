@@ -61,6 +61,14 @@ def request_body():
     return RequestBody(cherrypy.request.body,
                        cherrypy.request.process_request_body)
 
+def session(key, value=None):
+    r = cherrypy.session.get(key)
+
+    if value is not None:
+        cherrypy.session[key] = value
+
+    return r
+
 
 def abspath(path):
     if len(path) >= 2 and path[0] == "/" and path[1] == "~":
