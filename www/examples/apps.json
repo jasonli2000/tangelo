@@ -19,6 +19,12 @@
         },
 
         {
+            "name": "Bar Chart",
+            "path": "barChart",
+            "description": "The Tangelo <b>barChart</b> plugin, demonstrating the visualization using bar chart"
+        },
+
+        {
             "name": "Geo Node-Link Diagram",
             "path": "geonodelink",
             "description": "The Tangelo <b>geonodelink</b> plugin, demonstrating a colored node-link diagram on a GeoJSON world map."
