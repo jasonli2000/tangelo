@@ -226,6 +226,7 @@ set(JS_LINT_FILES
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/dendrogram.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/geodots.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/barChart.js
+    ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/donutChart.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/geonodelink.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/girderBrowser.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/mapdots.js
@@ -251,6 +252,7 @@ set(JS_LINT_FILES
     #${CMAKE_SOURCE_DIR}/www/examples/flickr/flickr.js
     ${CMAKE_SOURCE_DIR}/www/examples/geodots/geodots.js
     ${CMAKE_SOURCE_DIR}/www/examples/barChart/barChart.js
+    ${CMAKE_SOURCE_DIR}/www/examples/donutChart/donutChart.js
     ${CMAKE_SOURCE_DIR}/www/examples/geonodelink/geonodelink.js
     ${CMAKE_SOURCE_DIR}/www/examples/mapdots/mapdots.js
     #${CMAKE_SOURCE_DIR}/www/examples/ner/ner.js
@@ -325,6 +327,7 @@ set(JS_UGLIFY_FILES
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/dendrogram.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/geodots.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/barChart.js
+    ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/donutChart.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/geonodelink.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/girderBrowser.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/mapdots.js
