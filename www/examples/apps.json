@@ -30,6 +30,11 @@
             "description": "The Tangelo <b>donutChart</b> plugin, demonstrating the visualization using donut chart"
         },
         {
+            "name": "Parallel Coords",
+            "path": "parallelCoords",
+            "description": "The Tangelo <b>donutChart</b> plugin, demonstrating the visualization using parallel coordinates"
+        },
+        {
             "name": "Geo Node-Link Diagram",
             "path": "geonodelink",
             "description": "The Tangelo <b>geonodelink</b> plugin, demonstrating a colored node-link diagram on a GeoJSON world map."
