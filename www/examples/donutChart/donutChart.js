@@ -11,36 +11,126 @@ $(function () {
           ];
 
     var initSize = {
-      width: 400,
-      height: 400,
-      inner: 100
+        width: 400,
+        height: 240,
+        inner: 30 /* this is the ratio of the inner/outradius */
+    };
+
+    var margin = {
+        resizable: {
+            width: 20,
+            height: 20
+        },
+        windows: {
+            width: 100,
+            height: 320
+        }
     };
 
     var donutChartOptions = {
-      data: data,
-      width: initSize.width,
-      height: initSize.height,
-      inner: initSize.inner,
-      label: {field: "label"},
-      value: {field: "value"}
+        data: data,
+        width: initSize.width,
+        height: initSize.height,
+        inner: initSize.inner,
+        label: {
+            field: "label"
+        },
+        value: {
+            field: "value"
+        }
     };
 
+    function windowResizer() {
+        var win = $(window);
+        resizeDonutChart(win.width() - margin.windows.width, win.height() - margin.windows.height);
+    }
+
+    function disableInput() {
+        $('#width').prop("readonly", "readonly");
+        $('#height').prop("readonly", "readonly");
+        $('#inner').prop("readonly", "readonly");
+    }
+
+    function enableInput() {
+        $('#width').prop("readonly", "");
+        $('#height').prop("readonly", "");
+        $('#inner').prop("readonly", "");
+    }
+
+    function createResizableContainer() {
+        $("#bar-chart-panel").remove();
+        $("#content").remove();
+        $("#content-wrapper").append('<div id="bar-chart-panel" class="ui-widget-content"><div id="content"></div></div>');
+        $("#bar-chart-panel").resizable({
+            resize: function (eve, ui) {
+                resizeDonutChart(ui.size.width - margin.resizable.width, ui.size.height - margin.resizable.height);
+                updateInputOptions();
+            },
+            stop: function (eve, ui) {
+                resizeDonutChart(ui.size.width - margin.resizable.width, ui.size.height - margin.resizable.height);
+                updateInputOptions();
+            }
+        });
+    }
     function updateInputOptions() {
         $("input:text[id='inner']").val(donutChartOptions.inner);
         $("input:text[id='width']").val(donutChartOptions.width);
         $("input:text[id='height']").val(donutChartOptions.height);
     }
 
+    createResizableContainer();
     $("#content").donutChart(donutChartOptions);
     updateInputOptions();
 
+    function initDonutChartSize() {
+        donutChartOptions.width = initSize.width;
+        donutChartOptions.height = initSize.height;
+        donutChartOptions.inner = initSize.inner;
+    }
+
+    function updateResizingOption(option) {
+        if (option === "0") {
+            disableInput();
+            $(window).off("resize", windowResizer);
+            createResizableContainer();
+            initDonutChartSize();
+            $("#content").donutChart(donutChartOptions);
+            updateInputOptions();
+        } else if (option === "1") {
+            disableInput();
+            $("#content").remove();
+            $("#bar-chart-panel").remove();
+            $("#content-wrapper").append('<div id="content"></div>');
+            $(window).resize(windowResizer);
+            donutChartOptions.width = $(window).width() - margin.windows.width;
+            donutChartOptions.height = $(window).height() - margin.windows.height;
+            $("#content").donutChart(donutChartOptions);
+            updateInputOptions();
+        } else {
+            $(window).off("resize", windowResizer);
+            $("#content").remove();
+            $("#bar-chart-panel").remove();
+            $("#content-wrapper").append('<div id="content"></div>');
+            enableInput();
+            $("#content").donutChart(donutChartOptions);
+        }
+    }
+
     function resizeDonutChart(width, height, inner) {
+      console.log("resizeDonutChart is called " + width + ", " + height + ", " + inner);
       donutChartOptions.width = width;
       donutChartOptions.height = height;
-      donutChartOptions.inner = inner;
+      if (inner !== undefined){
+          donutChartOptions.inner = inner;
+      }
       $("#content").donutChart("destroy");
       $("#content").donutChart(donutChartOptions);
     }
+
+    $("input:radio[name='size-option']").change(function () {
+        var value = $(this).val();
+        updateResizingOption(value);
+    });
 
     $("input:text[id='width']").change(function() {
         var value = $(this).val();

@@ -1,14 +1,14 @@
 <!doctype html>
 <meta charset=utf-8>
 
-<title>Bar Chart</title>
+<title>Donut Chart</title>
 
 <link href=http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css rel=stylesheet>
 <link href=http://bootswatch.com/cosmo/bootstrap.min.css rel=stylesheet>
 <link href=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css rel=stylesheet>
 <script src=http://d3js.org/d3.v3.min.js></script>
 <script src=http://d3js.org/topojson.v1.min.js></script>
-<script src=http://trifacta.github.io/vega/releases/v1.3.3/vega.min.js></script>
+<script src=http://trifacta.github.io/vega/releases/v1.4.2/vega.min.js></script>
 <script src=http://code.jquery.com/jquery-1.8.2.min.js></script>
 <script src=http://code.jquery.com/ui/1.9.1/jquery-ui.min.js></script>
 <script src=http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js></script>
@@ -63,13 +63,18 @@
     <div class="panel-heading"><h4>Donut Chart Options:</h4></div>
     <div class="panel-body">
       <div id="size-option">
-        Width: <input type="text" id="width"  maxlength="5" size="7">
-        Height:<input type="text" id="height" maxlength="5" size="7">
-        Inner Radius:<input type="text" id="inner" maxlength="5" size="7">
+        <label>Resizing options: </label>
+        <input type="radio" id="container" name="size-option" checked="checked" value="0"><label for="container">Resizable Container</label>
+        <input type="radio" id="windows" name="size-option" value="1"><label for="windows">Window</label>
+        <input type="radio" id="specify" name="size-option" value="2"><label for="specify">Specified</label>
+        <br/>
+        Width: <input type="text" id="width"  maxlength="5" readonly="readonly" size="7">
+        Height:<input type="text" id="height" maxlength="5" readonly="readonly" size="7">
+        Inner Radius:<input type="text" id="inner" readonly="readonly" maxlength="5" size="7"> %
       </div>
     </div>
   </div>
 
-  <div id="content"></div>
+  <div id="content-wrapper"></div>
 </div>
 

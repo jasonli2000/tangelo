@@ -9,55 +9,61 @@
 
     tangelo.widget("tangelo.donutChart", {
         options: {
-            width : 460,
-            height : 300,
-            data: null,
-            label: tangelo.accessor({value: ""}),
-            value: tangelo.accessor({value: 1})
+            label: tangelo.accessor({
+                value: 0
+            }),
+            value: tangelo.accessor({
+                value: 0
+            }),
+            data: null
         },
 
         _create: function () {
-            console.log("create donutChart");
             this.options = $.extend(true, {}, this._defaults, this.options);
-            this.svg = d3.select(this.element.get(0))
-                .append("svg");
-            this._update();
+            var that = this,
+                vegaspec = tangelo.vegaspec.donutchart(that.options);
+            vg.parse.spec(vegaspec, function (chart) {
+                that.vis = chart;
+                that._update();
+            });
         },
 
         _update: function () {
-            console.log("update donutChart");
-            var width = this.options.width;
-            var height = this.options.height;
-            var radius = Math.min(width, height)/2;
-            var inner = this.options.inner;
-            var arc = d3.svg.arc()
-                .innerRadius(inner)
-                .outerRadius(radius - 20);
-            var colorScale = d3.scale.category20();
-            var pie = d3.layout.pie().sort(null).value(function(d) { return d.value; });
-            var svg = this.svg.attr("width", width)
-                .attr("height", height)
-                .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-            var g = svg.selectAll(".arc")
-                .data(pie(this.options.data))
-                .enter()
-                .append("g")
-                .attr("class","arc");
-            g.append("path")
-                .attr("fill", function(d, i) { return colorScale(i); })
-                .attr("d", arc)
-            g.append("text")
-                  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-                  .attr("dy", ".35em")
-                  .style("text-anchor", "middle")
-                  .text(function(d) { return d.data.label; });
+            var that = this;
+
+            if (this.options.data) {
+                this.options.data.forEach(function (d) {
+                    d.label = that.options.label(d);
+                    d.value = that.options.value(d);
+                });
+                if (this.vis) {
+                    if (this.options.width === 0 && this.options.height === 0) {
+                        this._setParentSize();
+                    }
+                    this.vis({
+                        el: that.element.get(0),
+                        data: {
+                            table: that.options.data
+                        }
+                    }).width(this.options.width).height(this.options.height).update();
+                }
+            }
         },
 
-        _destroy: function(){
-            console.log("destroy donutChart");
-            this.svg.remove();
+        _setParentSize: function () {
+            var that = this;
+            this.options.width = that.element.parent().width();
+            this.options.height = that.element.parent().height();
+            console.log("set parent size " + this.options.width + ", " + this.options.height);
         },
+
+        resize: function (width, height, inner) {
+            console.log("resize to " + width + ", " + height + ", " + inner);
+            this.options.width = width;
+            this.options.height = height;
+            this.options.innner = inner;
+            this._create(this.options);
+        }
 
     });
 }(window.tangelo, window.jQuery, window.vg));

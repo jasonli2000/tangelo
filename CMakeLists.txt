@@ -241,6 +241,7 @@ set(JS_LINT_FILES
     ${CMAKE_SOURCE_DIR}/tangelo.js/vega/_package.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vega/geovis.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vega/barchart.js
+    ${CMAKE_SOURCE_DIR}/tangelo.js/vega/donutchart.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vtkweb/_package.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vtkweb/vtkweb.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/widget/widget.js
@@ -319,6 +320,7 @@ set(JS_UGLIFY_FILES
     ${CMAKE_SOURCE_DIR}/tangelo.js/vega/_package.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vega/geovis.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vega/barchart.js
+    ${CMAKE_SOURCE_DIR}/tangelo.js/vega/donutchart.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vtkweb/_package.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/vtkweb/vtkweb.js
     ${CMAKE_SOURCE_DIR}/tangelo.js/plugin/controlPanel.js
